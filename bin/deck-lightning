@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+var dl = require("../index.js");
+
+var opts = {
+	delaySeconds: process.argv[2],
+	files: process.argv.slice(3)
+}
+
+dl(opts, function(err, html){
+	if(err){
+		throw err;
+	}
+	else{
+		console.log(html);
+	}
+});

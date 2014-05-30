@@ -1,0 +1,19 @@
+{
+  "name": "deck-lightning",
+  "version": "0.0.0",
+  "description": "turn a list of files into a forced lightning talk",
+  "main": "index.js",
+  "dependencies": {
+    "ejs": "~1.0.0",
+    "marked": "~0.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matthew Chase Whittemore <mcwhittemore@gmail.com>",
+  "license": "MIT",
+  "bin": {
+    "deck-lightning": "./bin/deck-lightning"
+  }
+}

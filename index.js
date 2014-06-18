@@ -16,28 +16,27 @@ module.exports = function(opts, cb){
 	var i = 0;
 	opts.files.forEach(function(file){
 		i++;
-		fs.readFile(file, "utf8", function(err, md){
-			if(err){
-				cb(err);
-				cb = function(){};
-			}
-			else{
-				var content =  marked(md);
-				ejsOpts.slides.push({
-					title: file,
-					content: content
-				});
-				i--;
-				done();
-			}
-		});
+    if (file.indexOf('https://gist.github.com/') == 0) {
+          generateSlide(file, '<script src="' + file + '"></script>');
+    }
+    else {
+      md = fs.readFileSync(file, {encoding: "utf8"});
+      generateSlide(file, marked(md));
+    }
 	});
+  done();
+
+  function generateSlide(title, content){
+    ejsOpts.slides.push({
+      title: title,
+      content: content
+    });
+  };
 
 	function done(){
-		if(i==0){
-			var html = ejs.render(template, ejsOpts);
-			cb(null, html);
-		}
+    generateSlide('The End', marked('# Thanks!\n[The beginning](#slide-0)'));
+    var html = ejs.render(template, ejsOpts);
+    cb(null, html);
 	}
 }
 
